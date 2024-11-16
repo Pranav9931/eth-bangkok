@@ -4,7 +4,14 @@ import { CarouselImg1 } from '../../assets';
 import TicketsListing from "../../components/ticketlisting.component";
 
 import ticketsData from '../tickets';
+import { useStateContext } from "../../context";
+import { useEffect } from "react";
 const HomePage = () => {
+
+    const { setActivePage, connect, ticketNumber, address, nftAsset, getTickets } = useStateContext();
+    useEffect(() => {
+        setActivePage("home");
+    }, [])
 
     const items = [
         {
