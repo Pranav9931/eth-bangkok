@@ -1,0 +1,206 @@
+.tct {
+    flex: 0.4;
+    display: flex;
+    /* padding: 20px; */
+    flex-direction: column;
+    margin: 0 auto;
+  }
+  
+  .ticketCard {
+    display: flex;
+    min-width: 600px;
+    flex-wrap: wrap;
+    background: #1a1a1a;
+    border-radius: 10px;
+    gap: 20px;
+    align-items: center;
+    font-size: 0.7em;
+    margin: 5px 0;
+  }
+  
+  .ticketCard {
+    position: relative; /* make .ticketCard a positioned parent */
+  }
+  
+  .ticketCard:before,
+  .ticketCard:after {
+    content: "";
+    position: absolute;
+    right: 135px;
+    width: 30px;
+    height: 30px;
+    background: #111;
+    border-radius: 50%;
+    /* mix-blend-mode:inherit; apply mix-blend-mode to blend with the background */
+  }
+  
+  
+  .ticketCard:before {
+    top: -15px;
+  }
+  
+  .ticketCard:after {
+    bottom: -15px;
+    background: #0a0a0a;
+  }
+  
+  .box-details {
+    /* padding: 10px; */
+    /* border-radius: 7px; */
+    overflow: auto;
+    /* border: 1px solid rgba(255, 255, 255, 0.05); */
+    max-width: 120px;
+    color: #0090ff;
+    font-weight: bold;
+    margin: 10px 0;
+  }
+  
+  .tct-img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+  
+  .ticket-details {
+    flex: 1;
+  }
+  
+  .primary {
+    margin: 15px 0;
+    background: #0090ff10;
+    padding: 10px;
+    color: #0090ff;
+    font-weight: 700;
+  }
+  
+  .tct-details {
+    margin: 0 auto;
+    width: 80%;
+  }
+  
+  .barcode-container {
+    display: flex;
+    /* max-width: 100px; */
+    transform: rotate(270deg);
+    justify-self: flex-end;
+    /* align-items: flex-end; */
+    border-top: 1px dashed rgba(255, 255, 255, .3);
+    height: 100px;
+  }
+
+  .barcode-container svg{
+    width: 180px;
+    height: 10vw;
+  }
+
+  .account-details-container {
+    display: flex;
+    /* flex-direction: column; */
+    /* align-items: center; */
+    padding: 20px;
+    background-color: #1a1a1a;
+    border-radius: 10px;
+    width: 600px;
+  }
+  
+  form {
+    display: flex;
+    /* flex-direction: column; */
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    flex: 0.5;
+
+  }
+  
+  label {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #fff;
+  }
+  
+  input {
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    margin-top: 5px;
+    font-size: 16px;
+    width: 100px;
+    background-color: #2d2d2d;
+    color: #fff;
+    outline: none;
+  }
+
+  .accounts-details{
+    padding: 10px;
+  }
+
+  .ticket-booking-payment-options{
+    min-width: 50%;
+    /* background-color: red; */
+    padding: 10px;
+    border-left: 1px dashed rgba(255, 255, 255, .2);
+  }
+
+  .ticket-booking-payment-options-cards {
+    background: #2d2d2d;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: 600;
+    margin: 0 0 10px 0;
+  }
+
+  .wallet-container{
+    display: flex;
+    gap: 5px;
+    margin: 15px 0 0 0;
+  }
+  .wallet-container-img-div{
+    background: #1a1a1a;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .wallet-container-img-div:hover{
+    background: #000;
+  }
+
+  .wallet-container-img-div img {
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+  }
+
+  .paymene-options-others{
+    background: #1a1a1a;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 0 0 5px 0;
+    cursor: pointer;
+  }
+
+  .paymene-options-others:hover{
+    background: #000;
+  }
+
+  
+  .card{
+    background: #1a1a1a;
+    padding: 15px;
+    border-radius: 10px;
+  }
+  .card input{
+    width: calc(100% - 20px);
+  }
+
+  .card__exp-cvv{
+    display: flex;
+    gap: 10px;
+  }

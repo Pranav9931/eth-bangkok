@@ -1,0 +1,75 @@
+.nfttickets-container{
+    padding: var(--global-padding);
+    margin: 20px 0;
+}
+
+.nfttickets-container-card{
+    background: #1a1a1a;
+    padding: 40px;
+    border-radius: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 40px;
+}
+.nfttickets-container-card-details{
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.nfttickets-container-card img{
+    width: 400px;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.nfttickets-container-card-details-weather {
+    padding: 10px;
+    background: #0090ff20;
+    border-radius: 5px;
+    color: #0090ff;
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.nfttickets-container-card-details-match {
+    padding: 10px;
+    background: #3b3b3b;
+    border-radius: 5px;
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+}
+
+.nfttickets-container-card-choose-nft-container{
+    min-width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.nft-tickets-wrapper{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(115px, 1fr));
+    gap: 10px;
+}
+.nft-tickets-wrapper img{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.activeNFT{
+    background: #0090ff30;
+    padding: 10px;
+    border-radius: 10px;
+    transition: all .3s ease-in-out;
+}
+
+.nftTicketCard {
+    padding: 10px;
+    border-radius: 10px;
+}
