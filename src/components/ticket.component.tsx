@@ -39,7 +39,7 @@ const TicketComponent = () => {
                             <span className="ticket-type-title">Standard</span>
                             <div className="price-details">
                                 <span className='price-stroke'>
-                                    {price} CHL
+                                    {price} CHZ
                                 </span>
                                 &nbsp;/ <span style={{ fontWeight: 500 }}>Ticket</span>
                             </div>
@@ -66,7 +66,7 @@ const TicketComponent = () => {
                             <span className="ticket-type-title">Premium</span>
                             <div className="price-details">
                                 <span className='price-stroke'>
-                                    {price + 3} CHL
+                                    {price + 3} CHZ
                                 </span>
                                 &nbsp;/ <span style={{ fontWeight: 500 }}>Ticket</span>
                             </div>

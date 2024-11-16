@@ -86,7 +86,7 @@ const Ticket = ({ propVal, imgUrl }: any) => {
                         <div style={{ flex: 1 }}>
                             <div style={{ fontWeight: 500 }}>Price</div>
                             <div className="box-details">
-                                {ticketNumber === 0 ? `${propVal.price}` : `${propVal.price + 3}`} CHL
+                                {ticketNumber === 0 ? `${propVal.price}` : `${propVal.price + 3}`} CHZ
                             </div>
                         </div>
                     </div>

@@ -81,7 +81,7 @@ function TicketsListing({ tickets }: TicketsListingProps) {
 
   function formatPrice(price: number) {
     const formattedPrice = price.toFixed(2);
-    return `${formattedPrice} CHL`;
+    return `${formattedPrice} CHZ`;
   }
 
   function formatUSDPrice(price: number) {
