@@ -9,6 +9,8 @@ import TicketCard4 from "./ticket-card-4.png"
 import TicketCard5 from "./ticket-card-5.jpeg"
 import TicketCard6 from "./ticket-card-6.jpeg"
 
+import WalletLogo from "./wallet-logo.png"
+
 export {
     Logo,
     CarouselImg1,
@@ -17,5 +19,6 @@ export {
     TicketCard3,
     TicketCard4,
     TicketCard5,
-    TicketCard6
+    TicketCard6,
+    WalletLogo
 }
