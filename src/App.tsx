@@ -1,14 +1,19 @@
-import { DynamicContextProvider, DynamicWidget } from '@dynamic-labs/sdk-react-core';
-import { EthereumWalletConnectors } from "@dynamic-labs/ethereum";
+import './App.css';
+import { Routes, Route } from "react-router-dom";
+import NavbarComponent from './components/navbar.component';
+import Homepage from './pages/home';
+function App() {
 
-const App = () => (
-  <DynamicContextProvider
-    settings={{
-      environmentId: '3466c161-f1bc-404f-ab4a-3eef2366141d',
-      walletConnectors: [ EthereumWalletConnectors ],
-    }}>
-    <DynamicWidget />
-  </DynamicContextProvider>
-);
+  return (
+    <div className="App">
+      <NavbarComponent />
+      <Routes>
+        <Route path="/" element={<Homepage />} />
+        <Route path="*" element={<Homepage />} />
+      </Routes>
+
+    </div>
+  );
+}
 
 export default App;
