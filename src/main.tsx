@@ -22,7 +22,7 @@ const evmNetworks = [
     nativeCurrency: {
       decimals: 18,
       name: 'Chiliz',
-      symbol: 'CHL',
+      symbol: 'CHZ',
       iconUrl: 'https://app.dynamic.xyz/assets/networks/eth.svg',
     },
     networkId: 88882,

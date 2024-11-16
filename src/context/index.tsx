@@ -1,28 +1,27 @@
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
-
-import { useAddress, useContract, useContractWrite } from "@thirdweb-dev/react";
-
-import { ethers, utils, Wallet } from 'ethers';
 import { useDynamicContext } from '@dynamic-labs/sdk-react-core';
+import { isEthereumWallet } from '@dynamic-labs/ethereum';
+import contractABI from "../contractABI/index.json"
+import { parseEther } from 'viem';
+
 
 const StateContext = createContext({} as any);
 
 export const StateContextProvider = ({ children }: { children: ReactNode }) => {
-    // state logic here
-
-    const { contract, error }: any = useContract("");
+    const { primaryWallet } = useDynamicContext();
+    const contractAddress = "0x3ff0C9bffeDBB4F73Dc1f98BaA1C5b585dbfA8bA";
     const [address, setAddress] = useState<string|undefined>('');
-
-    const connect = useDynamicContext()
-    useEffect(() => { 
-        setAddress(connect.primaryWallet?.address)
-    }, [connect])
-
-    // const address = useAddress();
 
     const [activePage, setActivePage] = useState("home");
 
     // const { mutateAsync: addTicketOwner, isLoading } = useContractWrite(contract, "addTicketOwner")
+
+    const connect = useDynamicContext()
+    useEffect(() => {
+        if (connect) {
+            setAddress(connect.primaryWallet?.address)
+        }
+    }, [connect])
 
     const [nftAsset, setNftAsset] = useState(
         {
@@ -41,20 +40,38 @@ export const StateContextProvider = ({ children }: { children: ReactNode }) => {
         getNFTAssets();
     }, [])
 
-    // Functions
+  
+
 
     const addTicket = async (_amount: string, _typeOfTicket: string, _imgUrl: string) => {
 
         try {
-            const val = ethers.utils.parseEther(_amount);
-            const data = contract.call('addTicketOwner', address, val, _typeOfTicket, _imgUrl,
-                {
-                    value: val
-                }
-            );
-            console.info("contract call successs", data);
+            const val = parseEther(_amount);
 
-            return data;
+            if (!primaryWallet) {
+                console.error("Wallet not connected");
+                throw new Error("Wallet not connected");
+            }
+    
+            if (!isEthereumWallet(primaryWallet)) {
+                throw new Error('bad');
+            }
+
+            const walletClient = await primaryWallet.getWalletClient()
+            const tx = await walletClient.writeContract({
+                address: contractAddress,
+                abi: contractABI,
+                functionName: 'addTicketOwner',
+                args: [address, val, _typeOfTicket, _imgUrl],
+                value: val
+              });
+
+            console.info("Contract call success:", tx);
+            if (tx) {
+                return tx
+            } else {
+                throw new Error('bad request')
+            }
         }
         catch (err) {
             console.error("Contract call failure");
@@ -64,25 +81,25 @@ export const StateContextProvider = ({ children }: { children: ReactNode }) => {
 
     const getTickets = async () => {
         let allTickets = [];
-        try {
-            const transactions = await contract.call('getAllTickets');
-            allTickets = transactions.map((i: any) => {
-                const timestamp = new Date(i.time.toNumber() * 1000).toLocaleString();
-                return (
-                    {
-                        owner: i.owner,
-                        time: timestamp,
-                        amount: utils.formatEther(i.amount),
-                        type: i.typeOfTicket,
-                        imgUrl: i.imgUrl
-                    }
-                );
-            });
+        // try {
+        //     const transactions = await contract.call('getAllTickets');
+        //     allTickets = transactions.map((i: any) => {
+        //         const timestamp = new Date(i.time.toNumber() * 1000).toLocaleString();
+        //         return (
+        //             {
+        //                 owner: i.owner,
+        //                 time: timestamp,
+        //                 amount: utils.formatEther(i.amount),
+        //                 type: i.typeOfTicket,
+        //                 imgUrl: i.imgUrl
+        //             }
+        //         );
+        //     });
 
-        } catch (err) {
-            console.error(err);
-        }
-        return allTickets;
+        // } catch (err) {
+        //     console.error(err);
+        // }
+        // return allTickets;
     }
 
 
@@ -91,7 +108,6 @@ export const StateContextProvider = ({ children }: { children: ReactNode }) => {
             {
                 address,
                 setAddress,
-                contract,
                 nftAsset,
                 setNftAsset,
                 ticketNumber,

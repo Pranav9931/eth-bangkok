@@ -26,7 +26,7 @@ const NavbarComponent = () => {
                 <div className="nav-links">
                     <li className={activePage === "home" ? "active" : ""} onClick={() => navigate("./")}>Home</li>
                     <li className={activePage === "yourtickets" ? "active" : ""} onClick={() => navigate("./tickets")}>Your Tickets</li>
-                    <li className={activePage === "recenttickets" ? "active" : ""} onClick={() => window.location.href = "https://spicy-explorer.chiliz.com/"} >Chiliz Scan</li>
+                    <li className={activePage === "recenttickets" ? "active" : ""} onClick={() => window.location.href = "https://spicy-explorer.chiliz.com/address/0x3ff0C9bffeDBB4F73Dc1f98BaA1C5b585dbfA8bA"} >Chiliz Scan</li>
                 </div>
             </div>
             <div className="walletArea">

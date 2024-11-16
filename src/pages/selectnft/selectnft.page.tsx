@@ -15,7 +15,7 @@ const SelectNFT = () => {
     const navigate = useNavigate();
     function formatPrice(price: number) {
         const formattedPrice = price.toFixed(2);
-        return `${formattedPrice} CHL`;
+        return `${formattedPrice} CHZ`;
     }
 
     function formatUSDPrice(price: number) {
@@ -81,7 +81,7 @@ const SelectNFT = () => {
                                 Price
                             </div>
                             <span style={{ color: '#0090ff' }}>
-                                {stateData.price} <span>CHL</span>
+                                {stateData.price} <span>CHZ</span>
                                 <span style={{ color: '#ffffff60', fontSize: '12px' }}> {formatUSDPrice(stateData.price)}</span>
                             </span>
 
