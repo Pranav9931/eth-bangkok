@@ -6,6 +6,7 @@ import TicketComponent from './components/ticket.component';
 import SelectNFT from './pages/selectnft/selectnft.page';
 import { useStateContext } from './context';
 import { useEffect } from 'react';
+import SuccessTransaction from './pages/success.transaction';
 function App() {
 
   const { setActivePage } = useStateContext();
@@ -24,6 +25,8 @@ function App() {
             <TicketComponent />
           </div>
         } />
+
+        <Route path="/success" element={<SuccessTransaction />} />
 
         <Route path="*" element={<Homepage />} />
       </Routes>

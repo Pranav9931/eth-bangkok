@@ -69,6 +69,9 @@ app.post('/', async (req, res) => {
                 }
 
                 if (user) {
+                    user.user_reward_point += 100
+                    await user.save()
+                    console.log("UPDATED USER REWARD POINTS")
                     return res.status(200).json("FOUND")
                 }
 

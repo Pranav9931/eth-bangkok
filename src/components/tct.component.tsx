@@ -41,9 +41,14 @@ const Ticket = ({ propVal, imgUrl }: any) => {
         }
 
         if (address) {
-            const data = await addTicket(String(_amount), _fanPointsUsed, _type, _imgUrl);
-            console.log("Transaction Successful", data);
-            navigate("../success");
+            try {  
+                const data = await addTicket(String(_amount), _fanPointsUsed, _type, _imgUrl);
+                console.log("Transaction Successful", data);
+                navigate("../success");
+            } catch (err) {
+                alert("PAYMENT ERROR")
+            }
+            
         } else {
             alert("Connect your wallet first")
         }
