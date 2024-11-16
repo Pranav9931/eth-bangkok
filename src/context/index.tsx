@@ -9,7 +9,7 @@ const StateContext = createContext({} as any);
 
 export const StateContextProvider = ({ children }: { children: ReactNode }) => {
     const { primaryWallet } = useDynamicContext();
-    const contractAddress = "0x837cBe8d21e3760477dc33813fE9552071e14FD7";
+    const contractAddress = "0x13CB0dd44aeDaa2E52b4C388cBAB3A76d2974EfF";
     const [address, setAddress] = useState<string|undefined>('');
     const [fanPoints, setFanPoints] = useState<number|null>(null)
 
