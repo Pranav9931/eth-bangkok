@@ -6,15 +6,16 @@ import { useNavigate } from 'react-router-dom';
 import Barcode from 'react-barcode';
 import { WalletLogo } from '../assets';
 import { useStateContext } from '../context';
-import { Wallet } from 'ethers';
 
 const Ticket = ({ propVal, imgUrl }: any) => {
 
+    const [fanPointsUsed, setFanPointsUsed] = useState<number|null>(null)
+    const [isFanPointUsed, setIsFanPointUsed] = useState(false);
+
     const {
         address,
-        setAddress,
         ticketNumber,
-        addTicket
+        addTicket,
     } = useStateContext();
 
 
@@ -27,13 +28,20 @@ const Ticket = ({ propVal, imgUrl }: any) => {
 
     const navigate = useNavigate();
 
-    const handlePayment = async () => {
+    const handlePayment = async (fanPointsUsed: number | null) => {
+
         const _type = ticketNumber === 0 ? "STANDARD" : "PREMIUM";
-        const _amount = ticketNumber === 0 ? `${propVal.price}` : `${propVal.price + 3}`;
+        let _amount: number = ticketNumber === 0 ? propVal.price : propVal.price + 3;
         const _imgUrl = imgUrl;
+        const _fanPointsUsed = fanPointsUsed || 0;
+
+        
+        if (isFanPointUsed && fanPointsUsed) {
+            _amount  = _amount - (_amount * (fanPointsUsed * 0.001))
+        }
 
         if (address) {
-            const data = await addTicket(_amount, _type, _imgUrl);
+            const data = await addTicket(String(_amount), _fanPointsUsed, _type, _imgUrl);
             console.log("Transaction Successful", data);
             navigate("../success");
         } else {
@@ -163,9 +171,26 @@ const Ticket = ({ propVal, imgUrl }: any) => {
                             Choose from the given wallets given below.
                         </div>
                         <div className="wallet-container">
-                            <div className="wallet-container-img-div" onClick={() => handlePayment()}>
+                            <div className="wallet-container-img-div" onClick={() => handlePayment(fanPointsUsed)}>
                                 <img src={WalletLogo} />
                             </div>
+
+                            <div className="wallet-container-img-div">
+                            <div style={{
+                                    display: 'flex',
+                                    background: !isFanPointUsed ? '#0090ff20' : '#0090FF',
+                                    borderRadius: '50px',
+                                    padding: '10px',
+                                    color: !isFanPointUsed ? '#0090ff' : '#FFFFFF',
+                                    gap: '10px',
+                                    fontSize: '10px'
+                                }}
+                                onClick={() => {setIsFanPointUsed(!isFanPointUsed);
+                                    setFanPointsUsed(200)
+                                }}
+                                > USE FAN POINTS: 200 </div>
+                            </div>
+                            
                         </div>
                     </div>
                     <div className="ticket-booking-payment-options-cards">
@@ -215,7 +240,7 @@ const Ticket = ({ propVal, imgUrl }: any) => {
                                 </div>
                             </div>
                         </div>
-                        <button className='btn-connect' style={{ margin: '10px 0 0 0', width: '100%' }} onClick={() => handlePayment()}>Book Ticket</button>
+                        <button className='btn-connect' style={{ margin: '10px 0 0 0', width: '100%' }} onClick={() => handlePayment(fanPointsUsed)}>Book Ticket</button>
 
                     </div>
                     <div className="ticket-booking-payment-options-cards">

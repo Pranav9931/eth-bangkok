@@ -61,6 +61,11 @@
 				"type": "uint256"
 			},
 			{
+				"internalType": "uint256",
+				"name": "_points",
+				"type": "uint256"
+			},
+			{
 				"internalType": "string",
 				"name": "_typeOfTicket",
 				"type": "string"
@@ -154,6 +159,11 @@
 					{
 						"internalType": "uint256",
 						"name": "amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "fanPointsUsed",
 						"type": "uint256"
 					},
 					{
@@ -289,6 +299,11 @@
 			{
 				"internalType": "uint256",
 				"name": "amount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "fanPointsUsed",
 				"type": "uint256"
 			},
 			{

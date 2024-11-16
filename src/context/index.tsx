@@ -9,8 +9,9 @@ const StateContext = createContext({} as any);
 
 export const StateContextProvider = ({ children }: { children: ReactNode }) => {
     const { primaryWallet } = useDynamicContext();
-    const contractAddress = "0x3ff0C9bffeDBB4F73Dc1f98BaA1C5b585dbfA8bA";
+    const contractAddress = "0x837cBe8d21e3760477dc33813fE9552071e14FD7";
     const [address, setAddress] = useState<string|undefined>('');
+    const [fanPoints, setFanPoints] = useState<number|null>(null)
 
     const [activePage, setActivePage] = useState("home");
 
@@ -43,7 +44,7 @@ export const StateContextProvider = ({ children }: { children: ReactNode }) => {
   
 
 
-    const addTicket = async (_amount: string, _typeOfTicket: string, _imgUrl: string) => {
+    const addTicket = async (_amount: string, _fanPointsUsed: number, _typeOfTicket: string, _imgUrl: string) => {
 
         try {
             const val = parseEther(_amount);
@@ -62,7 +63,7 @@ export const StateContextProvider = ({ children }: { children: ReactNode }) => {
                 address: contractAddress,
                 abi: contractABI,
                 functionName: 'addTicketOwner',
-                args: [address, val, _typeOfTicket, _imgUrl],
+                args: [address, val, _fanPointsUsed, _typeOfTicket, _imgUrl],
                 value: val
               });
 
@@ -113,6 +114,8 @@ export const StateContextProvider = ({ children }: { children: ReactNode }) => {
                 ticketNumber,
                 setTicketNumber,
                 addTicket,
+                fanPoints,
+                setFanPoints,
                 activePage,
                 setActivePage,
                 getTickets

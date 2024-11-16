@@ -3,10 +3,14 @@ const bodyParser = require('body-parser');
 const { default: mongoose } = require('mongoose');
 const app = express();
 
+const cors = require("cors");
+app.use(cors());
+
 require('dotenv').config();
 
 // Middleware to parse incoming JSON requests
 app.use(bodyParser.json());
+
 
 // Define a Mongoose schema for the chilzz_user collection
 const userSchema = new mongoose.Schema({
@@ -62,16 +66,20 @@ app.post('/', async (req, res) => {
                 if (!user) {
                     // Handle case if user is not found
                     console.log('User not found!');
-                    return res.status(404).send('User not found');
                 }
 
-                // Increase the user reward points by 100
-                user.user_reward_point += 100;
+                if (user) {
+                    return res.status(200).json("FOUND")
+                }
+
+                const userUpdate = new ChilzzUser({
+                    user_id: event.data.userId, // Generate random user ID
+                    user_wallet: event.data.walletPublicKey,
+                    user_reward_point: 100
+                })
 
                 // Save the updated user document
-                await user.save(); // Await the save operation
-
-                console.log(`User reward points updated to: ${user.user_reward_point}`);
+                await userUpdate.save(); // Await the save operation
 
                 // Send a successful response
                 console.log('USER REWARDS POINTS UPDATED');
@@ -90,6 +98,69 @@ app.post('/', async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
+
+app.post('/fan-token', async (req, res) => {
+    console.log(req.body)
+    const { wallet_address } = req.body;
+    if (wallet_address.length === 0) {
+        console.log("here")
+        return res.status(404).json("Bad Request");
+    }
+
+    try {
+        const user = await ChilzzUser.findOne({ user_wallet: wallet_address })
+        if (user) {
+            return res.status(200).json(user.user_reward_point)
+        } else {
+            return res.status(404).json("USER NOT FOUND")
+        }
+    } catch (err) {
+        return res.status(500).json("INTERNAL SERVER ERROR")
+    }
+})
+
+app.post('/fan-token-claim', async (req, res) => {
+    console.log(req.body);
+    const { wallet_address, points_to_be_modified, consume } = req.body;
+
+    // Validate the request body
+    if (!wallet_address || wallet_address.trim().length === 0) {
+        return res.status(400).json({ error: "Bad Request: Wallet address is required." });
+    }
+
+    if (!points_to_be_modified || isNaN(points_to_be_modified) || points_to_be_modified <= 0) {
+        return res.status(400).json({ error: "Bad Request: Points to be consumed must be a positive number." });
+    }
+
+    try {
+        // Find the user by wallet address
+        const user = await ChilzzUser.findOne({ user_wallet: wallet_address });
+
+        if (!user) {
+            return res.status(404).json({ error: "User not found" });
+        }
+
+        // Check if the user has sufficient reward points
+        if (user.user_reward_point < points_to_be_modified) {
+            return res.status(400).json({ error: "Insufficient reward points" });
+        }
+
+        // Update the user's reward points
+        if (consume) {
+            user.user_reward_point -= points_to_be_modified;
+        } else {
+            user.user_reward_point += points_to_be_modified
+        }
+
+        await user.save();
+
+        return res.status(200).json({ message: "Reward points successfully updated", user });
+    } catch (err) {
+        console.error("Error updating reward points:", err);
+        return res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+
 
 
 // Start the server
