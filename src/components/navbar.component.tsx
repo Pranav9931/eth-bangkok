@@ -5,19 +5,18 @@ import "./navbar.component.css"
 import { DynamicContextProvider, DynamicWidget } from '@dynamic-labs/sdk-react-core';
 import { EthereumWalletConnectors } from "@dynamic-labs/ethereum";
 import { Logo } from '../assets';
+import { useStateContext } from '../context';
 
 const NavbarComponent = () => {
+
+    const { activePage } = useStateContext();
+
+    
 
     const navigate = useNavigate();
     const ProfileArea = () => {
         return (
-            <DynamicContextProvider
-                settings={{
-                environmentId: '3466c161-f1bc-404f-ab4a-3eef2366141d',
-                walletConnectors: [ EthereumWalletConnectors ],
-            }}>
-                <DynamicWidget />
-            </DynamicContextProvider>
+            <DynamicWidget />
         )
     }
     return (
@@ -25,9 +24,9 @@ const NavbarComponent = () => {
             <div className="logo">
                 <img src={Logo} onClick={() => navigate("./")} />
                 <div className="nav-links">
-                    <li onClick={() => navigate("./")}>Home</li>
-                    <li onClick={() => navigate("./tickets")}>Your Tickets</li>
-                    <li onClick={() => window.location.href = ""} >Chiliz Scan</li>
+                    <li className={activePage === "home" ? "active" : ""} onClick={() => navigate("./")}>Home</li>
+                    <li className={activePage === "yourtickets" ? "active" : ""} onClick={() => navigate("./tickets")}>Your Tickets</li>
+                    <li className={activePage === "recenttickets" ? "active" : ""} onClick={() => window.location.href = "https://spicy-explorer.chiliz.com/"} >Chiliz Scan</li>
                 </div>
             </div>
             <div className="walletArea">

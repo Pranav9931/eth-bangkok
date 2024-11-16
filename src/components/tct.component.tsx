@@ -1,12 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import "./tct.component.css";
 
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import Barcode from 'react-barcode';
 import { WalletLogo } from '../assets';
+import { useStateContext } from '../context';
+import { Wallet } from 'ethers';
 
 const Ticket = ({ propVal, imgUrl }: any) => {
+
+    const {
+        address,
+        setAddress,
+        ticketNumber,
+        addTicket
+    } = useStateContext();
+
 
     // const [form, setForm] = useState([])
     // const [imgUrl, setImgUrl] = useState("")
@@ -18,29 +28,28 @@ const Ticket = ({ propVal, imgUrl }: any) => {
     const navigate = useNavigate();
 
     const handlePayment = async () => {
-        // const _type = ticketNumber === 0 ? "STANDARD" : "PREMIUM";
-        // const _amount = ticketNumber === 0 ? `${propVal.price}` : `${propVal.price + 3}`;
-        // const _imgUrl = imgUrl;
-        // if (address) {
-        //     const data = await addTicket(_amount, _type, _imgUrl);
-        //     console.log("Transaction Successful", data);
-        //     navigate("../success");
-        // } else {
-        //     alert("Connect your wallet first")
-        // }
+        const _type = ticketNumber === 0 ? "STANDARD" : "PREMIUM";
+        const _amount = ticketNumber === 0 ? `${propVal.price}` : `${propVal.price + 3}`;
+        const _imgUrl = imgUrl;
 
+        if (address) {
+            const data = await addTicket(_amount, _type, _imgUrl);
+            console.log("Transaction Successful", data);
+            navigate("../success");
+        } else {
+            alert("Connect your wallet first")
+        }
     }
 
     const [value, setValue] = useState('');
 
-    // useEffect(() => {
+    useEffect(() => {
+        const data = String(Math.random())
+        const price = ticketNumber === 0 ? propVal.price + `${data.slice(1, 7)}` : (propVal.price + 3) + `${data.slice(1, 7)}`;
 
-    //     const data = String(Math.random())
-    //     const price = ticketNumber === 0 ? propVal.price + `${data.slice(1, 7)}` : (propVal.price + 3) + `${data.slice(1, 7)}`;
-
-    //     const val = `${address ? address.slice(1, 10) : "0x0000000000000000"}${address ? address.slice(-10,) : "0000000000"}`
-    //     setValue(() => val);
-    // }, [address, ticketNumber])
+        const val = `${address ? address.slice(1, 10) : "0x0000000000000000"}${address ? address.slice(-10,) : "0000000000"}`
+        setValue(() => val);
+    }, [address, ticketNumber])
 
 
     return (
@@ -70,14 +79,14 @@ const Ticket = ({ propVal, imgUrl }: any) => {
                         <div style={{ flex: 1 }}>
                             <div style={{ fontWeight: 500 }}>Address</div>
                             <div className="box-details">
-                                {/* {address ? address.slice(0, 3) + "..." + address.slice(-5,) : "0x0"} */}
+                                {address ? address.slice(0, 3) + "..." + address.slice(-5,) : "0x0"}
                             </div>
                         </div>
 
                         <div style={{ flex: 1 }}>
                             <div style={{ fontWeight: 500 }}>Price</div>
                             <div className="box-details">
-                                {/* {ticketNumber === 0 ? `${propVal.price}` : `${propVal.price + 3}`} CHL */}
+                                {ticketNumber === 0 ? `${propVal.price}` : `${propVal.price + 3}`} CHL
                             </div>
                         </div>
                     </div>

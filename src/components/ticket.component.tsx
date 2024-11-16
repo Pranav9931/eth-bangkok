@@ -3,10 +3,13 @@ import "./ticket.component.css";
 
 import { useLocation } from 'react-router-dom';
 import Ticket from './tct.component';
+import { useStateContext } from '../context';
 
 const TicketComponent = () => {
 
-    let ticketNumber = 0;
+    const {
+        ticketNumber,
+    } = useStateContext();
 
     const [stateData, setStateData] = React.useState({
         nftTicket: {
