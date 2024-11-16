@@ -1,6 +1,9 @@
 import "./home.page.css"
 import CarouselSlider from '../../components/carousel.component';
 import { CarouselImg1 } from '../../assets';
+import TicketsListing from "../../components/ticketlisting.component";
+
+import ticketsData from '../tickets';
 const HomePage = () => {
 
     const items = [
@@ -51,7 +54,14 @@ const HomePage = () => {
                         <li><a href="#">Tickets</a></li>
                     </ul>
                 </div>
+                <div className="tickets-listing-container">
+
+                    <TicketsListing
+                        tickets={ticketsData}
+                    />
+                </div>
             </div>
+            
         </div>
     )
 }
