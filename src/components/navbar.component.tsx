@@ -8,13 +8,34 @@ import { Logo } from '../assets';
 
 const NavbarComponent = () => {
 
+    const evmNetworks = [
+        {
+          blockExplorerUrls: ['https://spicy-explorer.chiliz.com/'],
+          chainId: 88882,
+          chainName: 'Chiliz Spicy Testnet',
+          iconUrls: ['https://app.dynamic.xyz/assets/networks/eth.svg'],
+          name: 'Chiliz',
+          nativeCurrency: {
+            decimals: 18,
+            name: 'Chiliz',
+            symbol: 'CHL',
+            iconUrl: 'https://app.dynamic.xyz/assets/networks/eth.svg',
+          },
+          networkId: 88882,
+      
+          rpcUrls: ['https://spicy-rpc.chiliz.com'],
+          vanityName: 'Chiliz Spicy Testnet',
+        },
+    ]
+
     const navigate = useNavigate();
     const ProfileArea = () => {
         return (
             <DynamicContextProvider
                 settings={{
+                walletConnectors: [EthereumWalletConnectors],
                 environmentId: '3466c161-f1bc-404f-ab4a-3eef2366141d',
-                walletConnectors: [ EthereumWalletConnectors ],
+                overrides:  { evmNetworks } ,
             }}>
                 <DynamicWidget />
             </DynamicContextProvider>

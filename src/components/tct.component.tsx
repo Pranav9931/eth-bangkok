@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import "./tct.component.css";
 
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import Barcode from 'react-barcode';
 import { WalletLogo } from '../assets';
