@@ -9,7 +9,7 @@ const StateContext = createContext({} as any);
 
 export const StateContextProvider = ({ children }: { children: ReactNode }) => {
     const { primaryWallet } = useDynamicContext();
-    const contractAddress = "0x13CB0dd44aeDaa2E52b4C388cBAB3A76d2974EfF";
+    const contractAddress = "0xd612ba7aCF6fB198c8380c10882Cf837f8805A83";
     const [address, setAddress] = useState<string|undefined>('');
     const [fanPoints, setFanPoints] = useState<number|null>(null)
 
@@ -81,7 +81,7 @@ export const StateContextProvider = ({ children }: { children: ReactNode }) => {
     }
 
     const getTickets = async () => {
-        let allTickets = [];
+        // let allTickets = [];
         // try {
         //     const transactions = await contract.call('getAllTickets');
         //     allTickets = transactions.map((i: any) => {

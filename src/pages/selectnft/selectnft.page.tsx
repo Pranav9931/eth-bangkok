@@ -13,10 +13,10 @@ const SelectNFT = () => {
         window.scrollTo(0, 0);
     }, [location]);
     const navigate = useNavigate();
-    function formatPrice(price: number) {
-        const formattedPrice = price.toFixed(2);
-        return `${formattedPrice} CHZ`;
-    }
+    // function formatPrice(price: number) {
+    //     const formattedPrice = price.toFixed(2);
+    //     return `${formattedPrice} CHZ`;
+    // }
 
     function formatUSDPrice(price: number) {
         const formattedUSDPrice = (price * 1.2).toFixed(2);

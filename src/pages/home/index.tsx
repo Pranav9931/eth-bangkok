@@ -8,7 +8,7 @@ import { useStateContext } from "../../context";
 import { useEffect } from "react";
 const HomePage = () => {
 
-    const { setActivePage, connect, ticketNumber, address, nftAsset, getTickets } = useStateContext();
+    const { setActivePage } = useStateContext();
     useEffect(() => {
         setActivePage("home");
     }, [])

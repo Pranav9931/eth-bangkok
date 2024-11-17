@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import "./tct.component.css";
 
 import { useNavigate } from 'react-router-dom';
@@ -57,8 +57,8 @@ const Ticket = ({ propVal, imgUrl }: any) => {
     const [value, setValue] = useState('');
 
     useEffect(() => {
-        const data = String(Math.random())
-        const price = ticketNumber === 0 ? propVal.price + `${data.slice(1, 7)}` : (propVal.price + 3) + `${data.slice(1, 7)}`;
+        // const data = String(Math.random())
+        // const price = ticketNumber === 0 ? propVal.price + `${data.slice(1, 7)}` : (propVal.price + 3) + `${data.slice(1, 7)}`;
 
         const val = `${address ? address.slice(1, 10) : "0x0000000000000000"}${address ? address.slice(-10,) : "0000000000"}`
         setValue(() => val);
